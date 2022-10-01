@@ -63,3 +63,4 @@ int main(int argc, char *argv[])
 	printf("%d\n", calculate_cents(number));
 	return (0);
 }
+
