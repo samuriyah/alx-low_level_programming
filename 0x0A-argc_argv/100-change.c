@@ -1,66 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 /**
- * calculate_cents - calculates and return cents
- * @num: input params
- * Return: coins
+ * main - A proogram that prints the minimum number of coins to
+ * make change for an amount of money
+ * @argc: The arguements' counter
+ * @argv: The argument's values
+ * Return: 1 if the number of arguments passed is not exactly
+ * or 0 in otherwise
  */
-
-int calculate_cents(int num)
+int main(int argc, char **argv)
 {
-	int coins = 0;
+	int amount, coins = 0;
 
-	while (num)
+	if (argc == 2)
 	{
-		if (num >= 25)
+		amount = atoi(argv[1]);
+		if (amount < 0)
 		{
-			num -= 25;
+			printf("%d\n", 0);
+			return (0);
 		}
-		else if (num >= 10)
+		if (amount % 25 >= 0)
 		{
-			num -= 10;
+			coins += amount / 25;
+			amount = amount % 25;
 		}
-		else if (num >= 5)
+		if (amount % 10 >= 0)
 		{
-			num -= 5;
+			coins += amount / 10;
+			amount = amount % 10;
 		}
-		else if (num >= 2)
+		if (amount % 5 >= 0)
 		{
-			num -= 2;
+			coins += amount / 5;
+			amount = amount % 5;
 		}
-		else if (num >= 1)
+		if (amount % 2 >= 0)
 		{
-			num -= 1;
+			coins += amount / 2;
+			amount = amount % 2;
 		}
-		coins++;
+		if (amount % 1 >= 0)
+			coins += amount;
+		printf("%d\n", coins);
+		return (0);
 	}
-	return (coins);
-}
-
-/**
- * main - prints the minimum number of
- * coins to make change for an amount of money
- * @argc: amount of arguement
- * @argv: an array of inputs from argc
- *
- * Return: 0 for success
- */
-
-int main(int argc, char *argv[])
-{
-	int number;
-
-	if (argc != 2)
+	else
 	{
-		return (printf("Error\n"), 1);
+		printf("Error\n");
+		return (1);
 	}
-	number = atoi(argv[1]);
-	if (number < 0)
-	{
-		return (printf("Error\n"), 1);
-	}
-	printf("%d\n", calculate_cents(number));
-	return (0);
 }
 
